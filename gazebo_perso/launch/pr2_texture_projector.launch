@@ -1,0 +1,39 @@
+<!--
+File: pr2_texture_projector.launch
+Project: Stage UFPE Recife, BR, 2019-2020
+File Created: Saturday, 2nd May 2020 14:23:33 pm
+=====
+University: Universite Paul Sabatier - Toulouse (UPPSITECH - SRI)
+Author: Benoit TRINDADE (benoit.trindade31@gmail.com)
+=====
+Last Modified: Saturday, 16th May 2020 12:37:53 pm
+Modified By: Benoit TRINDADE (benoit.trindade31@gmail.com>)
+=====
+Copyright a choisir - 2020 Etudiant
+====
+HISTORY:
+Date       	By	Comments
+==========	===	=========================================================
+
+16-05-202020	BT	Launch file that permit to dynamic reconfigure the texture projector of the pr2
+-->
+
+<launch>
+
+  <!-- arg for modify the value during launch  -->
+  <arg name="forearm_projector" default="4"/>
+
+  <!-- stop the reading of texture projector for the forearm_cameras -->
+  <!-- left forearm -->
+  <node name="desactivate_l_trig_texture" pkg="dynamic_reconfigure" type="dynparam" output="screen" args="set /camera_synchronizer_node forearm_l_trig_mode $(arg forearm_projector)"/>
+  <!-- right forearm -->
+  <node name="desactivate_r_trig_texture" pkg="dynamic_reconfigure" type="dynparam" output="screen" args="set /camera_synchronizer_node forearm_r_trig_mode $(arg forearm_projector)"/>
+  <!-- Can be configure using rqt_reconfigure (gui) or the command below  -->
+  <!-- rosrun dynamic_reconfigure dynparam set /camera_synchronizer_node forearm_r_trig_mode 4 -->
+
+
+</launch>
+
+
+
+

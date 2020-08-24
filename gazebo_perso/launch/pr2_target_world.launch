@@ -1,0 +1,90 @@
+<!--
+File: pr2_target_world.launch
+Project: Stage UFPE Recife, BR, 2019-2020
+File Created: Saturday, 1st May 2020 12:18:22 pm
+=====
+University: Universite Paul Sabatier - Toulouse (UPPSITECH - SRI)
+Author: Benoit TRINDADE (benoit.trindade31@gmail.com)
+=====
+Last Modified: Monday, 18th May 2020 12:09:45 pm
+Modified By: Benoit TRINDADE (benoit.trindade31@gmail.com>)
+=====
+Copyright a choisir - 2020 Etudiant
+====
+HISTORY:
+Date       	By	Comments
+==========	===	=========================================================
+
+16-05-202020	BT	Launch file that start the gazebo world, bringup the robot and set up nodes and parameters in order to use the pr2 in an easy way
+-->
+
+<launch>
+
+  <!-- start up target world -->
+  <arg name="gui" default="true"/>
+  <arg name="headless" default="false" />
+  <arg name="debug" default="false" />
+  <arg name="paused" default="true"/>
+  <!-- TODO: throttled not implemented in gazebo_ros/empty_world.launch
+  <arg name="throttled" default="false"/>
+  -->
+  <arg name="world_name" default="worlds/target_qr.world"/> <!-- Note: the world_name is with respect to GAZEBO_RESOURCE_PATH environmental variable -->
+
+  <arg name="KINECT1" default="$(optenv KINECT1 false)" />
+  <arg name="KINECT2" default="$(optenv KINECT2 false)" />
+
+  <!-- To ignore the texture projection need to change param of forearm_trigger after robot bringup -->
+  <arg name="forearm_projector" default="4"/> <!-- type de projecteur 2 (ignore proj, 3 with porj, 4 without proj -->
+  <arg name="delay_bringup" default="12"/> <!-- delay in seconds-->
+
+  <!-- Parameters of the  pr2_joint_states_listener node about the joint_states server-->
+  <!-- arg to change joints informations output of the server during launch  -->
+  <arg name="joint_states_output" default="screen"/>
+  <!-- arg to allow the server to automatically respawn if the node died -->
+  <arg name="joint_states_server_auto_respawn" default="false"/>
+
+
+
+<!-- look for the custom gazebo world package -->
+  <include file="$(find gazebo_perso)/launch/target_world.launch">
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="headless" value="$(arg headless)" />
+    <arg name="paused" value="$(arg paused)" />
+    <arg name="debug" value="$(arg debug)" />
+    <arg name="use_sim_time" value="true" />
+    <!-- TODO: throttled not implemented in gazebo_perso/target_world.launch
+    <arg name="throttled" value="$(arg throttled)" />
+    -->
+    <arg name="world_name" value="$(arg world_name)"/>
+  </include>
+
+  <!-- start pr2 robot -->
+  <include file="$(find pr2_gazebo)/launch/pr2.launch">
+    <arg name="KINECT1" value="$(arg KINECT1)" />
+    <arg name="KINECT2" value="$(arg KINECT2)" />
+  </include>
+
+
+  <!-- choose the interpretation texture projector for the forearm_cameras -->
+  <!-- using a delay to wait the complete bringup of robot -->
+    <include file="$(find timed_roslaunch)/launch/timed_roslaunch.launch">
+      <arg name="time" value="$(arg delay_bringup)" />
+      <arg name="pkg" value="gazebo_perso" />
+      <arg name="file" value="pr2_texture_projector.launch" />
+      <arg name="value" value="forearm_projector:=$(arg forearm_projector)" />
+    </include>
+
+  <!-- if no delay needed use the following instead -->
+  <!--  Not working because the robot is not totally bringup before set of params  -->
+  <!-- <include file="$(find gazebo_perso)/launch/pr2_texture_projector.launch">
+    <arg name="forearm_projector" value="$(arg forearm_projector)" />
+  </include> -->
+
+  <!-- start pr2 joint_states_listener_server to provide the joint states of the robot as a service -->
+  <include file="$(find gazebo_perso)/launch/pr2_joint_states_listener.launch">
+    <arg name="joint_states_output" value="$(arg joint_states_output)" />
+    <arg name="joint_states_server_auto_respawn" value="$(arg joint_states_server_auto_respawn)" />
+  </include>
+
+</launch>
+

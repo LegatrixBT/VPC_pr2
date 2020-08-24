@@ -1,0 +1,64 @@
+ #######################################################################
+#                                                                       #
+#                                                                       #
+#   Add worlds in gazebo without touching environnement variables       #
+#                                                                       #
+#                                                                       #
+ #######################################################################
+# 
+#  To add easely gazebo worlds without modifying the env variables in the
+# shell script : (location <usr/share/gazebo_version/gazebo/setup.sh>)
+# 
+# Here are the variables:
+# 
+# GAZEBO_MODEL_PATH: colon-separated set of directories where Gazebo 
+# will search for models
+# 
+# GAZEBO_RESOURCE_PATH: colon-separated set of directories where Gazebo 
+# will search for other resources such as world and media files.
+# 
+# GAZEBO_MASTER_URI: URI of the Gazebo master. This specifies the IP and 
+# port where the server will be started and tells the clients 
+# where to connect to.
+# 
+# GAZEBO_PLUGIN_PATH: colon-separated set of directories where Gazebo 
+# will search for the plugin shared libraries at runtime.
+# 
+# GAZEBO_MODEL_DATABASE_URI: URI of the online model database where 
+# Gazebo will download models from.
+# 
+# 
+# You can add your world in the <gazebo_location>/worlds directory 
+#
+# To add a model, add your folder into the model directory 
+#
+#
+#  
+# .
+# ├── media
+# │   ├── audio
+# │   ├── dem
+# │   ├── fonts
+# │   ├── gui
+# │   │   ├── fonts
+# │   │   ├── imagesets
+# │   │   ├── looknfeel
+# │   │   └── schemes
+# │   ├── materials
+# │   │   ├── programs
+# │   │   │   └── deferred_rendering
+# │   │   │       ├── deferred_lighting
+# │   │   │       └── deferred_shading
+# │   │   ├── scripts
+# │   │   └── textures
+# │   ├── models
+# │   ├── rtshaderlib
+# │   │   └── materials
+# │   └── skyx
+# ├── models
+# │   ├── ground_plane
+# │   └── sun
+# └── worlds
+# 
+#
+

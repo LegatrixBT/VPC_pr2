@@ -1,0 +1,37 @@
+/*
+ * File: jeu de test du mgd
+ * Project: Stage UFPE Recife, BR, 2019-2020
+ * File Created: Invalid date
+ * -----
+ * University: Universite Paul Sabatier - Toulouse (UPPSITECH - SRI)
+ * Author: Benoit TRINDADE (benoit.trindade31@gmail.com)
+ * -----
+ * Last Modified: Friday, 29th May 2020 10:52:28 am
+ * Modified By: Benoit TRINDADE (benoit.trindade31@gmail.com>)
+ * -----
+ * Copyright a choisir - 2020 Etudiant
+ * -----
+ * HISTORY:
+ * Date       	By	Comments
+ * -----------	---	---------------------------------------------------------
+ */
+
+// Right arm
+
+T01 : q = prevQ  --> OK translation sur x de 0.1 
+      q = 39.99 deg -−> OK 
+      q = -139.9 --> OK 
+      q = - 45 --> OK 
+
+T02 : q = prevQ -->  ok 
+.
+.
+. 
+TBEE--> TBEE ok 
+
+TBC --> 
+
+
+
+
+

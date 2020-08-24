@@ -1,0 +1,41 @@
+<!--
+File: pr2_joint_states_listener.launch
+Project: Stage UFPE Recife, BR, 2019-2020
+File Created: Saturday, 16th May 2020 12:18:22 pm
+=====
+University: Universite Paul Sabatier - Toulouse (UPPSITECH - SRI)
+Author: Benoit TRINDADE (benoit.trindade31@gmail.com)
+=====
+Last Modified: Tuesday, 16th June 2020 4:29:41 pm
+Modified By: Benoit TRINDADE (benoit.trindade31@gmail.com>)
+=====
+Copyright a choisir - 2020 Etudiant
+====
+HISTORY:
+Date       	By	Comments
+==========	===	=========================================================
+
+16-06-202020	BT	Add an option to respawn automaticaly the server if it shutdown for an uknowned reason
+-->
+
+
+
+
+
+
+
+
+
+<launch>
+
+  <!-- arg to change joints informations output of the server during launch  -->
+  <arg name="joint_states_output" default="screen"/>
+  <!-- arg to allow the server to automatically respawn if the node died -->
+  <arg name="joint_states_server_auto_respawn" default="false"/>
+
+
+  <!-- Start the pr2_joint_states_listener as a server providing a service  -->
+  <node name="pr2_joint_states_listener_server" pkg="pr2_joint_states_listener" type="pr2_joint_states_listener_server"
+  output="$(arg joint_states_output)" respawn="$(arg joint_states_server_auto_respawn)"   />
+
+</launch>

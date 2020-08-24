@@ -1,0 +1,8 @@
+# Request is the name of the joint
+string[] name
+---
+# Response according if the joint name as been found
+uint32[] found
+float64[] position
+float64[] velocity
+float64[] effort
